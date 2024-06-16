@@ -26,7 +26,7 @@ const newPayment = async (req, res) => {
             "customer_name": "sukumar",
             "customer_mobile": "9999999999",
             "customer_email": "customer@gmail.com",
-            "callback_url": `http://localhost:5000/api/payment/status/${merchantTransactionId}`
+            "callback_url": `https://api.flipcartinterview.in/api/payment/status/${merchantTransactionId}`
         };
 
         const response = await axios.post(`https://allapi.in/order/create`, data);
@@ -56,11 +56,11 @@ const checkStatus = async (req, res) => {
         axios.post("https://allapi.in/order/status", data).then(async (response) => {
 
             if (response.data.results.status == "Success") {
-                const url = `http://172.212.91.177/success`
+                const url = `https://flipcartinterview.in/success`
                 return res.redirect(url)
             }
             
-            const url = `http://172.212.91.177/failure`
+            const url = `https://flipcartinterview.in/failure`
             return res.redirect(url)
 
         })
