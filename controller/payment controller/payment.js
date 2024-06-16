@@ -20,7 +20,7 @@ const newPayment = async (req, res) => {
         const data = {
             "token": "c990af-6bdfb9-0bd926-a73b03-f63035",
             "order_id": merchantTransactionId,
-            "txn_amount": 1,
+            "txn_amount": 100,
             "txn_note": "Pay For Interview",
             "product_name": "slot booking",
             "customer_name": "sukumar",
