@@ -30,6 +30,7 @@ const newPayment = async (req, res) => {
         };
 
         const response = await axios.post(`https://allapi.in/order/create`, data);
+       
         if (response.data.status == true) {
             return res.status(200).json(response.data.results.payment_url)
         } else {
@@ -38,6 +39,7 @@ const newPayment = async (req, res) => {
 
 
     } catch (error) {
+        console.log(error)
         return res.status(500).json({
             message: error.message,
             success: false
