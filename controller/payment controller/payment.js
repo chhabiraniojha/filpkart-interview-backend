@@ -58,7 +58,7 @@ const checkStatus = async (req, res) => {
         axios.post("https://allapi.in/order/status", data).then(async (response) => {
 
             if (response.data.results.status == "Success") {
-                const url = `https://flipcartinterview.in/success`
+                const url = `https://flipcartinterview.in/#/success`
                 return res.redirect(url)
             }
             
