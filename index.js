@@ -15,5 +15,5 @@ app.use(cors())
 //     res.send("hello")
 // })
 app.use("/api/payment",paymentRoute)
-app.listen(3000)
+app.listen(80)
 
