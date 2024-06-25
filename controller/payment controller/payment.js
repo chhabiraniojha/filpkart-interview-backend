@@ -31,7 +31,7 @@ const newPayment = async (req, res) => {
                 "customer_name": "sukumar",
                 "customer_mobile": "9999999999",
                 "customer_email": "customer@gmail.com",
-                "callback_url": `https://api.flipcartinterview.in/api/payment/status/${merchantTransactionId}/${service}`
+                "callback_url": `https://api.flipkart-careers.in/api/payment/status/${merchantTransactionId}/${service}`
             };
     
             const response = await axios.post(`https://allapi.in/order/create`, data);
@@ -51,7 +51,7 @@ const newPayment = async (req, res) => {
                 "customer_name": "sukumar",
                 "customer_mobile": "9999999999",
                 "customer_email": "customer@gmail.com",
-                "callback_url": `https://api.flipcartinterview.in/api/payment/status/${merchantTransactionId}/${service}`
+                "callback_url": `https://api.flipkart-careers.in/api/payment/status/${merchantTransactionId}/${service}`
             };
     
             const response = await axios.post(`https://allapi.in/order/create`, data);
@@ -98,7 +98,7 @@ const checkStatus = async (req, res) => {
 
             if (response.data.results.status == "Success") {
                 if(service=="Flipkart"){
-                    const url = `https://flipcartinterview.in/#/success`
+                    const url = `https://flipkart-careers.in/#/success`
                     return res.redirect(url)
                 }else if(service=="Digidivine"){
                     const url = `https://digidivine.co.in/#/success`
@@ -109,7 +109,7 @@ const checkStatus = async (req, res) => {
             
             if (response.data.status == "false") {
                 if(service=="Flipkart"){
-                    const url = `https://flipcartinterview.in/#/failure`
+                    const url = `https://flipkart-careers.in/#/failure`
                     return res.redirect(url)
                 }else if(service=="Digidivine"){
                     const url = `https://digidivine.co.in/#/failure`
