@@ -84,7 +84,7 @@ const checkStatus = async (req, res) => {
         let data={}
         if(service=="Flipkart"){
             data = {
-                "token": "c990af-6bdfb9-0bd926-a73b03-f63035",
+                "token": "ae5459-e864cd-fea490-e88480-4e3a2d",
                 "order_id": merchantTransactionId
             }
         }else if(service=="Digidivine"){
