@@ -23,7 +23,7 @@ const newPayment = async (req, res) => {
 
         if (service=="Flipkart") {
             const data = {
-                "token": "c990af-6bdfb9-0bd926-a73b03-f63035",
+                "token": "ae5459-e864cd-fea490-e88480-4e3a2d",
                 "order_id": merchantTransactionId,
                 "txn_amount": 99,
                 "txn_note": "Pay For Interview",
@@ -33,8 +33,9 @@ const newPayment = async (req, res) => {
                 "customer_email": "customer@gmail.com",
                 "callback_url": `https://api.flipkart-careers.in/api/payment/status/${merchantTransactionId}/${service}`
             };
-    
+            console.log(data)
             const response = await axios.post(`https://allapi.in/order/create`, data);
+            console.log(response)
            
             if (response.data.status == true) {
                 return res.status(200).json(response.data.results.payment_url)
@@ -43,7 +44,7 @@ const newPayment = async (req, res) => {
             }
         }else if(service=="Digidivine"){
             const data = {
-                "token": "a4cb98-9a840e-e500fb-4ad325-287bf2",
+                "token": "ae5459-e864cd-fea490-e88480-4e3a2d",
                 "order_id": merchantTransactionId,
                 "txn_amount":99,
                 "txn_note": "Pay For Interview",
@@ -55,6 +56,7 @@ const newPayment = async (req, res) => {
             };
     
             const response = await axios.post(`https://allapi.in/order/create`, data);
+            // console.log(response)
            
             if (response.data.status == true) {
                 return res.status(200).json(response.data.results.payment_url)
@@ -66,9 +68,9 @@ const newPayment = async (req, res) => {
 
 
     } catch (error) {
-        console.log(error)
+        // console.log(error)
         return res.status(500).json({
-            message: error.message,
+            message: error,
             success: false
         })
     }
