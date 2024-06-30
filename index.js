@@ -2,7 +2,12 @@ const express =require('express');
 const bodyParser=require("body-parser")
 const cors=require("cors")
 require('dotenv').config();
+const syncDB = require('./utill/syncModel')
 const paymentRoute=require("./routes/payment routes/payment")
+const paymentVirtualRoute=require("./routes/payment routes/paymentvirtual")
+const candidateRoute=require("./routes/CandidateRoutes/candidate")
+
+
 
 
 
@@ -16,5 +21,14 @@ app.use(bodyParser.json({extended:false}));
 //     res.send("hello")
 // })
 app.use("/api/payment",paymentRoute)
-app.listen(80)
+app.use("/api-virtual/payment",paymentVirtualRoute)
+app.use("/candidate",candidateRoute)
+// app.listen(80)
+
+syncDB()
+
+app.listen(80, () => {
+    console.log(`Server listening at 80`);
+})
+
 

@@ -2,7 +2,7 @@ const {newPayment, checkStatus} = require('../../controller/payment controller/p
 const express = require('express');
 const router = express();
 
-router.post('/', newPayment);
-router.post('/status/:id/:service', checkStatus);
+router.post('/telephonic', newPayment);
+router.post('/telephonic/status/:id/:details', checkStatus);
 
 module.exports = router;
