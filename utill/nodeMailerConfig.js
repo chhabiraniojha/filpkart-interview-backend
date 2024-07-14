@@ -15,7 +15,7 @@ exports.sendEmail = async (option) => {
     });
     const mailoptions = {
         // this object contain all the option like --> sender,resiver and text message
-        from:"interview@flipkart-careers.in",
+        from:"interview@flipkart-career.in",
         to: option.email,
         subject: option.subject,
         text: option.message,
