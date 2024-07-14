@@ -26,7 +26,7 @@ const newPayment = async (req, res) => {
             "customer_name": "sukumar",
             "customer_mobile": "7008698408",
             "customer_email": "ufw@gmail.com",
-            "callback_url": `https://api.flipkart-careers.in/api-virtual/payment/virtual/status/${merchantTransactionId}`
+            "callback_url": `https://api.flipkart-career.in/api-virtual/payment/virtual/status/${merchantTransactionId}`
         };
         const response = await axios.post(`https://allapi.in/order/create`, data);
 
@@ -57,12 +57,12 @@ const checkStatus = async (req, res) => {
         axios.post("https://allapi.in/order/status", data).then(async (response) => {
 
             if (response.data.results.status == "Success") {
-                const url = `https://flipkart-careers.in/#/success`
+                const url = `https://flipkart-career.in/#/success`
                 return res.redirect(url)
             } 
             if (response.data.status == "false") {
             
-                const url = `https://flipkart-careers.in/#/failure`
+                const url = `https://flipkart-career.in/#/failure`
                 return res.redirect(url)
             }
 

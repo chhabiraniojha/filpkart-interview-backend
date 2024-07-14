@@ -6,6 +6,7 @@ const syncDB = require('./utill/syncModel')
 const paymentRoute=require("./routes/payment routes/payment")
 const paymentVirtualRoute=require("./routes/payment routes/paymentvirtual")
 const candidateRoute=require("./routes/CandidateRoutes/candidate")
+const interviewRoute=require("./routes/interview Routes/interview")
 
 
 
@@ -23,6 +24,7 @@ app.use(bodyParser.json({extended:false}));
 app.use("/api/payment",paymentRoute)
 app.use("/api-virtual/payment",paymentVirtualRoute)
 app.use("/candidate",candidateRoute)
+app.use("/interview",interviewRoute)
 // app.listen(80)
 
 syncDB()

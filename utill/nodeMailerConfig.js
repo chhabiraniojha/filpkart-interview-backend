@@ -9,7 +9,7 @@ exports.sendEmail = async (option) => {
         port: 465,
         secure: true,
         auth: {
-            user:"interview@flipkart-careers.in",
+            user:"interview@flipkart-career.in",
             pass:"rinku9938300585@",
         },
     });
