@@ -53,7 +53,7 @@ const sendMailForslotBookTwo = async (req, res) => {
                 `Based on your performance, we would like to invite you to the next stage of our selection process, which is the virtual interview round. This round will provide us with an opportunity to further discuss your qualifications and experience in more detail.\n\n` +
                 `Please find below your Candidate ID, which you will need to book your slot for the virtual interview:\n` +
                 `**Candidate ID: ${id}**\n\n` +
-                `To proceed with scheduling your virtual interview, please use the link provided here https://flipkart-careers.in/#/book-final-slot, where you can select a suitable time slot from the available options.\n\n` +
+                `To proceed with scheduling your virtual interview, please use the link provided here https://flipkart-career.in/#/book-final-slot, where you can select a suitable time slot from the available options.\n\n` +
                 `Should you encounter any issues or have any questions regarding the process, please do not hesitate to reach out to me directly at support@flipkart-careers.in or WhatsApp No-9348521149.\n\n` +
                 `Once again, congratulations on your progress so far, and we look forward to speaking with you further.\n\n` +
                 `Best regards,\n` +
