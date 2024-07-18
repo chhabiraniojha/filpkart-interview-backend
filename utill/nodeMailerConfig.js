@@ -9,13 +9,13 @@ exports.sendEmail = async (option) => {
         port: 465,
         secure: true,
         auth: {
-            user:"interview@flipkart-career.in",
+            user:"interview@flipkartcareers.site",
             pass:"rinku9938300585@",
         },
     });
     const mailoptions = {
         // this object contain all the option like --> sender,resiver and text message
-        from:"interview@flipkart-career.in",
+        from:"interview@flipkartcareers.site",
         to: option.email,
         subject: option.subject,
         text: option.message,
