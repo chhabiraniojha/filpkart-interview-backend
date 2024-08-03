@@ -11,35 +11,41 @@ function generateTransactionId() {
     const TransactionId = `${merchentPrefiex}${timeStamp}${randomNum}`
     return TransactionId
 }
+function getRandomNumber(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+// Example usage:
+
 
 // console.log(merchantTransactionId)
 
 const newPayment = async (req, res) => {
     let { name, email, phone, slotDate, slotTime, selectedVacancy, language } = req.body;
     let encodedParams = Object.entries(req.body).map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`).join('&');
-
+    const randomNumber = getRandomNumber(90, 99);
     try {
 
         let merchantTransactionId = generateTransactionId()
 
-            const data = {
-                "token": "ae5459-e864cd-fea490-e88480-4e3a2d",
-                "order_id": merchantTransactionId,
-                "txn_amount": 99,
-                "txn_note": "pay",
-                "product_name": "pay",
-                "customer_name": name,
-                "customer_mobile": phone,
-                "customer_email": email,
-                "callback_url": `https://api.flipkartcareers.site/api/payment/telephonic/status/${merchantTransactionId}/${encodedParams}`
-            };
-            const response = await axios.post(`https://allapi.in/order/create`, data);
+        const data = {
+            "token": "ae5459-e864cd-fea490-e88480-4e3a2d",
+            "order_id": merchantTransactionId,
+            "txn_amount": 1,
+            "txn_note": "pay",
+            "product_name": "pay",
+            "customer_name": name,
+            "customer_mobile": phone,
+            "customer_email": email,
+            "callback_url": `http://localhost:80/api/payment/telephonic/status/${merchantTransactionId}/${encodedParams}`
+        };
+        const response = await axios.post(`https://allapi.in/order/create`, data);
 
-            if (response.data.status == true) {
-                return res.status(200).json(response.data.results.payment_url)
-            } else {
-                return;
-            }
+        if (response.data.status == true) {
+            return res.status(200).json(response.data.results.payment_url)
+        } else {
+            return;
+        }
 
     } catch (error) {
         // console.log(error)
@@ -66,43 +72,44 @@ const checkStatus = async (req, res) => {
     const merchantTransactionId = req.params.id;
 
     try {
-            let data = {
-                "token": "ae5459-e864cd-fea490-e88480-4e3a2d",
-                "order_id": merchantTransactionId
-            }
+        let data = {
+            "token": "ae5459-e864cd-fea490-e88480-4e3a2d",
+            "order_id": merchantTransactionId
+        }
         axios.post("https://allapi.in/order/status", data).then(async (response) => {
 
             if (response.data.results.status == "Success") {
-                    await candidateModel.create({
-                        name,
-                        email,
-                        phone,
-                        slotDate,
-                        slotTime,
-                        slotStartTime,
-                        selectedVacancy,
-                        language,
-                    })
-                    const inSlotDate = moment(slotDate).format('DD-MM-YYYY');
-                    await sendEmail({
-                        email: email,
-                        subject: "Telephonic Interview Schedule - Flipkart Internet Private Limited",
-                        message: `Hello ${name},\n\n` +
-                            `We are pleased to inform you that you have been shortlisted for the telephonic round of our recruitment process at Flipkart Internet Private Limited.\n\n` +
-                            `You are scheduled for a telephonic interview on ${inSlotDate}, between ${slotTime}.\n\n` +
-                            `During this time, you will receive a call from Mr. Sukumar Behera, our interviewer.\n\n` +
-                            `Please ensure that you are available and that your phone is reachable during the specified time frame. The interview is an important part of our selection process, and we appreciate your prompt attention to this matter.\n\n` +
-                            `We look forward to speaking with you soon.\n\n` +
-                            `Best regards,\n` +
-                            `HR Department\n` +
-                            `Flipkart Internet Private Limited`
-                    })
-                    const url = `https://flipkartcareers.site/#/success`
-                    return res.redirect(url)
+                const candidate = await candidateModel.create({
+                    name,
+                    email,
+                    phone,
+                    slotDate,
+                    slotTime,
+                    slotStartTime,
+                    selectedVacancy,
+                    language,
+                })
+                const inSlotDate = moment(slotDate).format('DD-MM-YYYY');
+                await sendEmail({
+                    email: email,
+                    subject: "Telephonic Interview Schedule - AMAZON RETAIL INDIA PRIVATE LIMITED",
+                    message: `Hello ${name},\n\n
+                        We are pleased to inform you that you have been shortlisted for the next stage of our recruitment process at AMAZON RETAIL INDIA PRIVATE LIMITED.\n\n
+                        Before proceeding to the telephonic interview round, you are required to complete an online assessment. Please use the following link to access the assessment: http://localhost:5173/#/online-assessment-test. Your candidate ID for the assessment is: ${candidate.id}\n\n
+                        The online assessment needs to be completed by 24 hours.\n\n 
+                        Please note that only candidates who successfully complete the online assessment will be eligible for the telephonic interview. If you pass the online assessment, you will be scheduled for a telephonic interview on ${inSlotDate}, between ${slotTime}. During this time, you will receive a call from Mr. Subham Pal, our interviewer.\n\n
+                        Please ensure that you are available and that your phone is reachable during the specified time frame for both the online assessment and the telephonic interview. The assessment and interview are important parts of our selection process, and we appreciate your prompt attention to these matters.\n\n
+                        We look forward to your participation and wish you the best of luck with the online assessment.\n\n
+                        Best regards,\n
+                        HR Department\n
+                        AMAZON RETAIL INDIA PRIVATE LIMITED`
+                })
+                const url = `http://localhost:5173/#/success`
+                return res.redirect(url)
             }
             if (response.data.status == "false") {
-                    const url = `https://flipkartcareers.site/#/failure`
-                    return res.redirect(url)
+                const url = `https://flipkartcareers.site/#/failure`
+                return res.redirect(url)
             }
 
 
