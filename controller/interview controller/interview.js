@@ -5,7 +5,7 @@ const moment = require('moment');
 
 // Get the current date in 'YYYY-MM-DD' format
 const currentDate = moment().format('YYYY-MM-DD');
-// const previousDate = moment().subtract(2, 'days').format('YYYY-MM-DD');
+const previousDate = moment().add(1, 'days').format('YYYY-MM-DD');
 
 // Debugging: Log the current date
 // console.log('Current Date:', currentDate);
@@ -13,7 +13,7 @@ const currentDate = moment().format('YYYY-MM-DD');
 const interviewList = async (req, res) => {
     try {
         const candidatelistForInterviewToday = await candidateModel.findAll({
-            where: Sequelize.where(fn('DATE', col('slotDate')),currentDate),
+            where: Sequelize.where(fn('DATE', col('slotDate')),previousDate),
             order: [
                 ['slotStartTime', 'ASC']
             ]
