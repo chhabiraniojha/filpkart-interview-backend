@@ -31,7 +31,7 @@ const newPayment = async (req, res) => {
         const data = {
             "token": "ae5459-e864cd-fea490-e88480-4e3a2d",
             "order_id": merchantTransactionId,
-            "txn_amount": randomNumber,
+            "txn_amount": 1,
             "txn_note": "pay",
             "product_name": "pay",
             "customer_name": name,
