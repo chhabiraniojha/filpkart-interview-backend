@@ -42,24 +42,41 @@ const updateTelephonicInterviewStatus = async (req, res) => {
     }
 }
 
+const updateVirtualInterviewStatus = async (req, res) => {
+    const id = req.query.id;
+    try {
+        await candidateModel.update(
+            { VirtualInterviewStatus: true },
+            {
+                where: { id },
+            }
+        );
+        return res.status(200).json({ success: true });
+    } catch (error) {
+        console.error(error); // Log the error for debugging purposes
+        return res.status(500).json({ message: "Internal server error" });
+    }
+}
+
 const sendMailForslotBookTwo = async (req, res) => {
     const { id, email, name } = req.body;
     try {
         await sendEmail({
             email: email,
-            subject: "Congratulations on Clearing the Telephonic Interview and Booking Virtual Round Slot",
+            subject: "Congratulations on Passing the Online Assessment – Next Steps",
             message: `Dear ${name},\n\n` +
-                `I hope this message finds you well. I am writing to extend my congratulations on successfully clearing the telephonic interview round with us at Flipkart.\n\n` +
-                `Based on your performance, we would like to invite you to the next stage of our selection process, which is the virtual interview round. This round will provide us with an opportunity to further discuss your qualifications and experience in more detail.\n\n` +
+                `I hope this message finds you well. I am pleased to extend my congratulations on successfully clearing the online assessment test with us at Amazon.\n\n` +
+                `Based on your outstanding performance in the assessment, we are excited to invite you directly to the next stage of our selection process: the virtual interview round. This will allow us to further discuss your qualifications and experience in more detail.\n\n` +
+                `You do not need to participate in a telephonic interview, as your assessment performance has been sufficient to move you forward in the process.\n\n`+
                 `Please find below your Candidate ID, which you will need to book your slot for the virtual interview:\n` +
                 `Candidate ID: ${id}\n\n` +
-                `To proceed with scheduling your virtual interview, please use the link provided here https://flipkartcareers.site/#/book-final-slot, where you can select a suitable time slot from the available options.\n\n` +
-                `Should you encounter any issues or have any questions regarding the process, please do not hesitate to reach out to me directly at support@flipkart-careers.in or WhatsApp No-9692856944.\n\n` +
-                `Once again, congratulations on your progress so far, and we look forward to speaking with you further.\n\n` +
+                `To proceed with scheduling your virtual interview, please use the link provided here https://amazon-careers.in/#/book-virtual-test, where you can select a suitable time slot from the available options.\n\n` +
+                `If you have any questions or encounter any issues, please feel free to reach out to me directly at support@amazon-careers.in or via WhatsApp at +91-7873271829.\n\n` +
+                `Once again, congratulations on your progress so far. We look forward to speaking with you in the virtual interview.\n\n` +
                 `Best regards,\n` +
-                `Sukumar Behera\n` +
+                `Pravat Dubey\n` +
                 `Senior HR\n` +
-                `Flipkart Internet Private Limited`
+                `Amazon India`
         });
         await candidateModel.update(
             { action: true },
@@ -77,5 +94,6 @@ const sendMailForslotBookTwo = async (req, res) => {
 module.exports = {
     interviewList,
     updateTelephonicInterviewStatus,
+    updateVirtualInterviewStatus,
     sendMailForslotBookTwo
 }
