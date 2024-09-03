@@ -13,9 +13,10 @@ const previousDate = moment().add(1, 'days').format('YYYY-MM-DD');
 const interviewList = async (req, res) => {
     try {
         const candidatelistForInterviewToday = await candidateModel.findAll({
-            where: Sequelize.where(fn('DATE', col('slotDate')),previousDate),
+            // where: Sequelize.where(fn('DATE', col('slotDate')),previousDate),
+            where:{action:false},
             order: [
-                ['slotStartTime', 'ASC']
+                ['slotDate', 'DESC']
             ]
         });
         console.log(candidatelistForInterviewToday)

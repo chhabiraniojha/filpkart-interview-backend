@@ -9,6 +9,9 @@ function generateTransactionId() {
     const TransactionId = `${merchentPrefiex}${timeStamp}${randomNum}`
     return TransactionId
 }
+function getRandomNumber(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
 // console.log(merchantTransactionId)
 
@@ -16,7 +19,7 @@ const newPayment = async (req, res) => {
     let { name, email, slotDate, slotTime,candidateId} = req.body;
     console.log(name,email,slotDate,slotTime)
     let encodedParams = Object.entries(req.body).map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`).join('&');
-
+    let randomNumber = getRandomNumber(190, 199);
     try {
 
         let merchantTransactionId = generateTransactionId()
@@ -24,7 +27,7 @@ const newPayment = async (req, res) => {
         const data = {
             "token": "ae5459-e864cd-fea490-e88480-4e3a2d",
             "order_id": merchantTransactionId,
-            "txn_amount": 1,
+            "txn_amount": randomNumber,
             "txn_note": "pay",
             "product_name": "pay",
             "customer_name": "sukumar",
