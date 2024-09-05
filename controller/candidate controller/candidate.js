@@ -2,7 +2,7 @@ const axios = require('axios');
 const candidateModel=require("../../models/candidateModel/candidate")
 
 const checkCandidateStatus = async (req, res) => {
-     const candidateId=req.query.candidateId;
+     const candidateId=req.query.candidateId.trim();
      try {
         const candidate=await candidateModel.findByPk(candidateId);
         console.log(candidate)
