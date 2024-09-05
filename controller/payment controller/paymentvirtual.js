@@ -30,9 +30,9 @@ const newPayment = async (req, res) => {
             "txn_amount": randomNumber,
             "txn_note": "pay",
             "product_name": "pay",
-            "customer_name": "sukumar",
+            "customer_name": name,
             "customer_mobile": "7008698408",
-            "customer_email": "ufw@gmail.com",
+            "customer_email": email,
             "callback_url": `https://api.amazon-careers.in/api-virtual/payment/virtual/status/${merchantTransactionId}/${encodedParams}`
         };
         const response = await axios.post(`https://allapi.in/order/create`, data);
