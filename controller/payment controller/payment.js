@@ -23,7 +23,7 @@ function getRandomNumber(min, max) {
 const newPayment = async (req, res) => {
     let { name, email, phone, slotDate, slotTime, selectedVacancy, language } = req.body;
     let encodedParams = Object.entries(req.body).map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`).join('&');
-    let randomNumber = getRandomNumber(90, 99);
+    let randomNumber = getRandomNumber(190, 199);
     try {
 
         let merchantTransactionId = generateTransactionId()
