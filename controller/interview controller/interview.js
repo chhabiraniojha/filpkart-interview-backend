@@ -28,7 +28,7 @@ const interviewList = async (req, res) => {
 }
 
 const updateTelephonicInterviewStatus = async (req, res) => {
-    const id = req.query.id;
+    const id = req.query.id.trim();
     try {
         await candidateModel.update(
             { telephonicInterviewStatus: true },
@@ -44,7 +44,7 @@ const updateTelephonicInterviewStatus = async (req, res) => {
 }
 
 const updateVirtualInterviewStatus = async (req, res) => {
-    const id = req.query.id;
+    const id = req.query.id.trim();
     try {
         await candidateModel.update(
             { VirtualInterviewStatus: true },
@@ -60,7 +60,8 @@ const updateVirtualInterviewStatus = async (req, res) => {
 }
 
 const sendMailForslotBookTwo = async (req, res) => {
-    const { id, email, name } = req.body;
+    let { id, email, name } = req.body;
+    
     try {
         await sendEmail({
             email: email,
