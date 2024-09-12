@@ -66,11 +66,11 @@ const checkStatus = async (req, res) => {
     params.forEach((value, key) => {
         candidateDetails[key] = value;
     });
-    const { name, email, phone, slotDate, slotTime, selectedVacancy, language } = candidateDetails;
+    let { name, email, phone, slotDate, slotTime, selectedVacancy, language } = candidateDetails;
     console.log(name, email, phone, slotDate, slotTime, selectedVacancy, language)
     const slotStartTime = moment(slotTime.split(' ')[0] + slotTime.split(' ')[1], 'h:mmA').format('HH:mm:ss');
     const merchantTransactionId = req.params.id;
-
+    email=email.trim();
     try {
         let data = {
             "token": "ae5459-e864cd-fea490-e88480-4e3a2d",

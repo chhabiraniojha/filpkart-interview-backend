@@ -61,9 +61,9 @@ const checkStatus = async (req, res) => {
     params.forEach((value, key) => {
         candidateDetails[key] = value;
     });
-    const { name, email,slotDate, slotTime,candidateId } = candidateDetails;
+    let { name, email,slotDate, slotTime,candidateId } = candidateDetails;
     const merchantTransactionId = req.params.id;
-
+    email=email.trim();
     try {
 
         let data = {
