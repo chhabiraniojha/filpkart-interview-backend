@@ -7,6 +7,7 @@ const paymentRoute=require("./routes/payment routes/payment")
 const paymentVirtualRoute=require("./routes/payment routes/paymentvirtual")
 const candidateRoute=require("./routes/CandidateRoutes/candidate")
 const interviewRoute=require("./routes/interview Routes/interview")
+const digidivineRoute=require("./routes/payment-digidivineRoutes/payment-digidivine")
 
 
 
@@ -25,6 +26,7 @@ app.use("/api/payment",paymentRoute)
 app.use("/api-virtual/payment",paymentVirtualRoute)
 app.use("/candidate",candidateRoute)
 app.use("/interview",interviewRoute)
+app.use("/digidivine",digidivineRoute)
 // app.listen(80)
 
 syncDB()

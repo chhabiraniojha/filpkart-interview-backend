@@ -61,6 +61,7 @@ const updateVirtualInterviewStatus = async (req, res) => {
 
 const sendMailForslotBookTwo = async (req, res) => {
     let { id, email, name } = req.body;
+    email=email.trim();
     
     try {
         await sendEmail({
