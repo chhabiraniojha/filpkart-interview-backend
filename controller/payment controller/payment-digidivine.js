@@ -1,6 +1,6 @@
 const axios = require('axios');
 const moment = require("moment");
-let { sendEmail } = require('../../utill/nodeMailerConfigDigidivine')
+let { sendEmailDigidivine } = require('../../utill/nodeMailerConfigDigidivine')
 const candidateModel = require("../../models/candidateModel/candidate")
 
 
@@ -102,7 +102,7 @@ const checkStatus = async (req, res) => {
                     language,
                 })
                 const inSlotDate = moment(slotDate).format('DD-MM-YYYY');
-                await sendEmail({
+                await sendEmailDigidivine({
                     email: email,
                     subject: "Telephonic Interview Schedule - DIGIDIVINE ONLINE SERVICES PRIVATE LIMITED",
                     message: `Hello ${name},\n
