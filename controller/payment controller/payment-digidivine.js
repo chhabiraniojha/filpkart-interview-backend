@@ -24,7 +24,8 @@ const newPayment = async (req, res) => {
     // console.log("hii")
     let { name, email, phone, slotDate, slotTime, selectedVacancy, language } = req.body;
     phone = phone.replace(/[^0-9]/g, ''); // Remove all non-numeric characters
-    if (phone.startsWith('91')) {
+    
+    if (phone.startsWith('91') && (phone.length>10)) {
         phone = phone.substring(2); // Remove +91 prefix if present
     }
     // Ensure phone number is exactly 10 digits
