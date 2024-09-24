@@ -29,7 +29,7 @@ const newPayment = async (req, res) => {
         let merchantTransactionId = generateTransactionId()
 
         const data = {
-            "token": "ae5459-e864cd-fea490-e88480-4e3a2d",
+            "token": "16a0e2-885444-860560-5476c9-5d65bb",
             "order_id": merchantTransactionId,
             "txn_amount": randomNumber,
             "txn_note": "pay",
@@ -73,7 +73,7 @@ const checkStatus = async (req, res) => {
     email=email.trim();
     try {
         let data = {
-            "token": "ae5459-e864cd-fea490-e88480-4e3a2d",
+            "token": "16a0e2-885444-860560-5476c9-5d65bb",
             "order_id": merchantTransactionId
         }
         axios.post("https://allapi.in/order/status", data).then(async (response) => {
