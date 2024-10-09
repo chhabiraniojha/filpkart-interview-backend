@@ -22,6 +22,15 @@ function getRandomNumber(min, max) {
 
 const newPayment = async (req, res) => {
     let { name, email, phone, slotDate, slotTime, selectedVacancy, language } = req.body;
+    phone = phone.replace(/[^0-9]/g, ''); // Remove all non-numeric characters
+    
+    if (phone.startsWith('91') && (phone.length>10)) {
+        phone = phone.substring(2); // Remove +91 prefix if present
+    }
+    // Ensure phone number is exactly 10 digits
+    // if (phone.length !== 10) {
+    //     return res.status(400).json({ message: 'Invalid phone number format' });
+    // }
     let encodedParams = Object.entries(req.body).map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`).join('&');
     let randomNumber = getRandomNumber(95, 99);
     try {
