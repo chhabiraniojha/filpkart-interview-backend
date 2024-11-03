@@ -32,7 +32,7 @@ const newPayment = async (req, res) => {
     //     return res.status(400).json({ message: 'Invalid phone number format' });
     // }
     let encodedParams = Object.entries(req.body).map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`).join('&');
-    let randomNumber = getRandomNumber(190, 199);
+    let randomNumber = getRandomNumber(95, 99);
     try {
 
         let merchantTransactionId = generateTransactionId()
