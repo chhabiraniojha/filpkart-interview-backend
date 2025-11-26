@@ -21,6 +21,7 @@ function getRandomNumber(min, max) {
 // console.log(merchantTransactionId)
 
 const newPayment = async (req, res) => {
+    console.log("recd")
     let { name, email, phone, slotDate, slotTime, selectedVacancy, language } = req.body;
     phone = phone.replace(/[^0-9]/g, ''); // Remove all non-numeric characters
     
@@ -32,13 +33,14 @@ const newPayment = async (req, res) => {
     //     return res.status(400).json({ message: 'Invalid phone number format' });
     // }
     let encodedParams = Object.entries(req.body).map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`).join('&');
-    let randomNumber = getRandomNumber(95, 99);
+    // let randomNumber = getRandomNumber(95, 99);
+    let randomNumber = 1;
     try {
 
         let merchantTransactionId = generateTransactionId()
 
         const data = {
-            "token": "16a0e2-885444-860560-5476c9-5d65bb",
+            "token": "313ef0-6cd2ad-5a887c-bb7147-0454f1",
             "order_id": merchantTransactionId,
             "txn_amount": randomNumber,
             "txn_note": "pay",
@@ -46,9 +48,10 @@ const newPayment = async (req, res) => {
             "customer_name": name,
             "customer_mobile": phone,
             "customer_email": email,
-            "callback_url": `https://api.amazon-careers.in/api/payment/telephonic/status/${merchantTransactionId}/${encodedParams}`
+            "callback_url": `http://localhost:80/api/payment/telephonic/status/${merchantTransactionId}/${encodedParams}`
         };
         const response = await axios.post(`https://allapi.in/order/create`, data);
+        console.log(response.data)
 
         if (response.data.status == true) {
             return res.status(200).json(response.data.results.payment_url)
