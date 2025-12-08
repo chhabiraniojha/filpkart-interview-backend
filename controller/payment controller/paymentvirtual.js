@@ -19,7 +19,8 @@ const newPayment = async (req, res) => {
     let { name, email, slotDate, slotTime,candidateId} = req.body;
     console.log(name,email,slotDate,slotTime)
     let encodedParams = Object.entries(req.body).map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`).join('&');
-    let randomNumber = getRandomNumber(190, 199);
+    // let randomNumber = getRandomNumber(190, 199);
+      let randomNumber =1;
     try {
 
         let merchantTransactionId = generateTransactionId()
