@@ -116,11 +116,11 @@ const checkStatus = async (req, res) => {
                         HR Department\n
                         AMAZON RETAIL INDIA PRIVATE LIMITED`
                 })
-                const url = `https://amazon-careers.in/#/success`
+                const url = `http://localhost:5173/#/success`
                 return res.redirect(url)
             }
             if (response.data.status == "false") {
-                const url = `https://amazon-careers.in/#/failure`
+                const url = `http://localhost:5173/#/failure`
                 return res.redirect(url)
             }
 
