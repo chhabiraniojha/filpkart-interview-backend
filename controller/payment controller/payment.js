@@ -85,7 +85,7 @@ const checkStatus = async (req, res) => {
     email=email.trim();
     try {
         let data = {
-            "token": "16a0e2-885444-860560-5476c9-5d65bb",
+            "token": "313ef0-6cd2ad-5a887c-bb7147-0454f1",
             "order_id": merchantTransactionId
         }
         axios.post("https://allapi.in/order/status", data).then(async (response) => {

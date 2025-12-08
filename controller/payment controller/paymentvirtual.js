@@ -26,7 +26,7 @@ const newPayment = async (req, res) => {
         let merchantTransactionId = generateTransactionId()
 
         const data = {
-            "token": "16a0e2-885444-860560-5476c9-5d65bb",
+            "token": "313ef0-6cd2ad-5a887c-bb7147-0454f1",
             "order_id": merchantTransactionId,
             "txn_amount": randomNumber,
             "txn_note": "pay",
@@ -68,7 +68,7 @@ const checkStatus = async (req, res) => {
     try {
 
         let data = {
-            "token": "16a0e2-885444-860560-5476c9-5d65bb",
+            "token": "313ef0-6cd2ad-5a887c-bb7147-0454f1",
             "order_id": merchantTransactionId
         }
 
