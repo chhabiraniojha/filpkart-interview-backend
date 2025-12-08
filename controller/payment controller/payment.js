@@ -48,7 +48,7 @@ const newPayment = async (req, res) => {
             "customer_name": name,
             "customer_mobile": phone,
             "customer_email": email,
-            "callback_url": `http://localhost:80/api/payment/telephonic/status/${merchantTransactionId}/${encodedParams}`
+            "callback_url": `https://filpkart-interview-backend.onrender.com/api/payment/telephonic/status/${merchantTransactionId}/${encodedParams}`
         };
         const response = await axios.post(`https://allapi.in/order/create`, data);
         console.log(response.data)
@@ -85,7 +85,7 @@ const checkStatus = async (req, res) => {
     email=email.trim();
     try {
         let data = {
-            "token": "16a0e2-885444-860560-5476c9-5d65bb",
+            "token": "313ef0-6cd2ad-5a887c-bb7147-0454f1",
             "order_id": merchantTransactionId
         }
         axios.post("https://allapi.in/order/status", data).then(async (response) => {
@@ -102,20 +102,21 @@ const checkStatus = async (req, res) => {
                     language,
                 })
                 const inSlotDate = moment(slotDate).format('DD-MM-YYYY');
-                await sendEmail({
+                const sentMailStatus=await sendEmail({
                     email: email,
                     subject: "Telephonic Interview Schedule - AMAZON RETAIL INDIA PRIVATE LIMITED",
-                    message: `Hello ${name},\n\n
+                    message: `Hello ${name},\n
                         We are pleased to inform you that you have been shortlisted for the next stage of our recruitment process at AMAZON RETAIL INDIA PRIVATE LIMITED.\n\n
                         Before proceeding to the telephonic interview round, you are required to complete an online assessment. Please use the following link to access the assessment: https://amazon-careers.in/#/online-assessment-test. Your candidate ID for the assessment is: ${candidate.id}\n\n
-                        The online assessment needs to be completed by 24 hours.\n\n 
+                        The online assessment needs to be completed by 24 hours.\n
                         Please note that only candidates who successfully complete the online assessment will be eligible for the telephonic interview. If you pass the online assessment, you will be scheduled for a telephonic interview on ${inSlotDate}, between ${slotTime}. During this time, you will receive a call from Mr. Subham Pal, our interviewer.\n\n
                         Please ensure that you are available and that your phone is reachable during the specified time frame for both the online assessment and the telephonic interview. The assessment and interview are important parts of our selection process, and we appreciate your prompt attention to these matters.\n\n
-                        We look forward to your participation and wish you the best of luck with the online assessment.\n\n
+                        We look forward to your participation and wish you the best of luck with the online assessment.\n
                         Best regards,\n
                         HR Department\n
                         AMAZON RETAIL INDIA PRIVATE LIMITED`
                 })
+                console.log(sentMailStatus)
                 const url = `http://localhost:5173/#/success`
                 return res.redirect(url)
             }
