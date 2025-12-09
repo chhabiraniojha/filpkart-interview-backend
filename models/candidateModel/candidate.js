@@ -57,6 +57,11 @@ const Candidate=sequelize.define('candidate',{
     type:Sequelize.BOOLEAN,
     allowNull:false,
     defaultValue:false
+  },
+  action2:{
+    type:Sequelize.BOOLEAN,
+    allowNull:false,
+    defaultValue:false
   }
 
 });
