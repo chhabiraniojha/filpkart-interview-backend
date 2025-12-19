@@ -129,7 +129,8 @@ Once again, congratulations on your progress so far. We look forward to speaking
 Best regards,\n
 Pravat Dubey\n
 Senior HR\n
-Amazon India`,
+Placement Zone\n
+Vendor Amazon`,
     });
     await candidateModel.update(
       { action: true },
@@ -158,7 +159,8 @@ Please do not be discouraged by this outcome. We encourage you to apply again in
 We wish you the very best in your career journey ahead.\n
 Best regards,\n
 HR Department\n
-Amazon India`,
+Placement Zone\n
+Vendor Amazon`,
     });
     await candidateModel.update(
       { action2: true },

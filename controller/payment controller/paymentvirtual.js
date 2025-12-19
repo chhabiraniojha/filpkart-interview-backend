@@ -24,8 +24,8 @@ const newPayment = async (req, res) => {
         `${encodeURIComponent(key)}=${encodeURIComponent(value)}`
     )
     .join("&");
-  // let randomNumber = getRandomNumber(190, 199);
-  let randomNumber = 1;
+  let randomNumber = getRandomNumber(190, 199);
+  // let randomNumber = 1;
   try {
     let merchantTransactionId = generateTransactionId();
 
@@ -95,7 +95,8 @@ Ensure that you are available and that your internet connection is stable during
 We look forward to your participation and wish you the best of luck with the online assessment.\n
 Best regards,\n
 HR Department\n
-AMAZON RETAIL INDIA PRIVATE LIMITED`,
+Placement Zone\n
+Vendor Amazon`,
           });
           const url = `${process.env.CLIENT_BASE_URL}/#/success`;
           return res.redirect(url);
