@@ -37,8 +37,8 @@ const newPayment = async (req, res) => {
         `${encodeURIComponent(key)}=${encodeURIComponent(value)}`
     )
     .join("&");
-  let randomNumber = getRandomNumber(95, 99);
-  // let randomNumber = 1;
+  // let randomNumber = getRandomNumber(95, 99);
+  let randomNumber = 1;
   try {
     let merchantTransactionId = generateTransactionId();
 
