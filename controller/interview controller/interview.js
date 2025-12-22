@@ -151,16 +151,21 @@ const sendFinalMail = async (req, res) => {
   try {
     await sendEmail({
       email: email,
-      subject: "Update on Your Assessment Result – Amazon Recruitment",
+      subject: "Congratulations! Selection Confirmation & Next Steps",
       message: `Dear ${name},\n
-Thank you for taking the time to complete the online assessment as part of our recruitment process at Amazon.\n
-We appreciate your effort and interest in the position. After careful review of your assessment, we regret to inform you that you have not been shortlisted for the next stage of the selection process.\n
-Please do not be discouraged by this outcome. We encourage you to apply again in the future, as there may be other opportunities that align with your skills and experience.\n
-We wish you the very best in your career journey ahead.\n
-Best regards,\n
-HR Department\n
-Placement Zone\n
-Vendor Amazon`,
+      Congratulations!\n
+      We are pleased to inform you that you have been successfully selected based on your performance in the online assessment conducted as part of our recruitment process associated with Amazon hiring partners.\n
+      As you have scored above 80% in the assessment, the virtual interview round is not required in your case.\n
+      The next stage of the process, including document verification and joining formalities, will now begin.\n
+      To proceed further and receive detailed instructions, please contact our authorized recruitment coordinator:\n
+      Name: Pravat Dubey\n
+      WhatsApp Number: +91 9937628031\n
+      Kindly ensure that you communicate only through the above-mentioned contact for official guidance and next steps. Please keep your required documents ready and respond promptly to avoid any delays.\n
+      Once again, congratulations on your selection. We wish you a smooth onboarding experience and great success in your career ahead.\n
+      Best regards,\n
+      HR Department\n
+      Placement Zone\n
+      Vendor Amazon`
     });
     await candidateModel.update(
       { action2: true },
