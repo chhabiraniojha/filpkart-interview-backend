@@ -57,6 +57,7 @@ The online assessment needs to be completed within 24 hours.\n
 Please note that only candidates who successfully complete the online assessment will be eligible for the telephonic interview. If you pass the online assessment, you will be scheduled for a telephonic interview on ${inSlotDate}, between ${slotTime}. During this time, you will receive a call from Mr. Subham Pal, our interviewer.\n
 Please ensure that you are available and that your phone is reachable during the specified time frame for both the online assessment and the telephonic interview. The assessment and interview are important parts of our selection process, and we appreciate your prompt attention to these matters.\n
 We look forward to your participation and wish you the best of luck with the online assessment.\n
+If you have any questions or encounter any issues, feel free to reach out to us via WhatsApp at +91-9937628031.\n
 Best regards,\n
 HR Department\n
 Placement Zone\n

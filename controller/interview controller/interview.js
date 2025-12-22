@@ -124,7 +124,7 @@ Please find below your Candidate ID, which you will need to book your slot for t
 Candidate ID: ${id}\n
 To schedule your virtual interview, please use the link provided here:\n
 ${process.env.CLIENT_BASE_URL}/#/book-virtual-test\n
-If you have any questions or encounter any issues, feel free to reach out to me at support@amazon-careers.in or via WhatsApp at +91-7873271829.\n
+If you have any questions or encounter any issues, feel free to reach out to us via WhatsApp at +91-9937628031.\n
 Once again, congratulations on your progress so far. We look forward to speaking with you in the virtual interview.\n
 Best regards,\n
 Pravat Dubey\n

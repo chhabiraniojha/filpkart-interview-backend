@@ -31,6 +31,7 @@ The online assessment needs to be completed within 24 hours.\n
 Please note that only candidates who successfully complete the online assessment will be eligible for the virtual interview. Upon successful completion of the assessment, you will receive a separate email containing the link and details for the virtual interview.\n
 Ensure that you are available and that your internet connection is stable during the assessment and the subsequent virtual interview. The assessment and interview are crucial parts of our selection process, and we appreciate your prompt attention to these steps.\n
 We look forward to your participation and wish you the best of luck with the online assessment.\n
+If you have any questions or encounter any issues, feel free to reach out to us via WhatsApp at +91-9937628031.\n
 Best regards,\n
 HR Department\n
 Placement Zone\n
