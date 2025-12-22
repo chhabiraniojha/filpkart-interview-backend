@@ -17,59 +17,111 @@ function getRandomNumber(min, max) {
 // Example usage:
 
 // console.log(merchantTransactionId)
-
 const newPayment = async (req, res) => {
   console.log("recd");
   let { name, email, phone, slotDate, slotTime, selectedVacancy, language } =
     req.body;
+
   phone = phone.replace(/[^0-9]/g, ""); // Remove all non-numeric characters
 
   if (phone.startsWith("91") && phone.length > 10) {
     phone = phone.substring(2); // Remove +91 prefix if present
   }
-  // Ensure phone number is exactly 10 digits
-  // if (phone.length !== 10) {
-  //     return res.status(400).json({ message: 'Invalid phone number format' });
-  // }
-  let encodedParams = Object.entries(req.body)
-    .map(
-      ([key, value]) =>
-        `${encodeURIComponent(key)}=${encodeURIComponent(value)}`
-    )
-    .join("&");
-  let randomNumber = getRandomNumber(495, 499);
-  // let randomNumber = 1;
+  const slotStartTime = moment(
+    slotTime.split(" ")[0] + slotTime.split(" ")[1],
+    "h:mmA"
+  ).format("HH:mm:ss");
+  email = email.trim();
   try {
-    let merchantTransactionId = generateTransactionId();
-
-    const data = {
-      token: "313ef0-6cd2ad-5a887c-bb7147-0454f1",
-      order_id: merchantTransactionId,
-      txn_amount: randomNumber,
-      txn_note: "pay",
-      product_name: "pay",
-      customer_name: name,
-      customer_mobile: phone,
-      customer_email: email,
-      callback_url: `${process.env.BASE_URL}/api/payment/telephonic/status/${merchantTransactionId}/${encodedParams}`,
-      // https://api.amazon-careers.in
-    };
-    const response = await axios.post(`https://allapi.in/order/create`, data);
-    console.log(response.data);
-
-    if (response.data.status == true) {
-      return res.status(200).json(response.data.results.payment_url);
-    } else {
-      return;
-    }
-  } catch (error) {
-    // console.log(error)
-    return res.status(500).json({
-      message: error,
-      success: false,
+    const candidate = await candidateModel.create({
+      name,
+      email,
+      phone,
+      slotDate,
+      slotTime,
+      slotStartTime,
+      selectedVacancy,
+      language,
     });
+    const inSlotDate = moment(slotDate).format("DD-MM-YYYY");
+    await sendEmail({
+      email: email,
+      subject:
+        "Telephonic Interview Schedule - AMAZON RETAIL INDIA PRIVATE LIMITED",
+      message: `Hello ${name},\n
+We are pleased to inform you that you have been shortlisted for the next stage of our recruitment process at AMAZON RETAIL INDIA PRIVATE LIMITED.\n
+Before proceeding to the telephonic interview round, you are required to complete an online assessment. Please use the following link to access the assessment:\n
+${process.env.CLIENT_BASE_URL}/#/online-assessment-test\n
+Your candidate ID for the assessment is: ${candidate.id}\n
+The online assessment needs to be completed within 24 hours.\n
+Please note that only candidates who successfully complete the online assessment will be eligible for the telephonic interview. If you pass the online assessment, you will be scheduled for a telephonic interview on ${inSlotDate}, between ${slotTime}. During this time, you will receive a call from Mr. Subham Pal, our interviewer.\n
+Please ensure that you are available and that your phone is reachable during the specified time frame for both the online assessment and the telephonic interview. The assessment and interview are important parts of our selection process, and we appreciate your prompt attention to these matters.\n
+We look forward to your participation and wish you the best of luck with the online assessment.\n
+Best regards,\n
+HR Department\n
+Placement Zone\n
+Vendor Amazon`
+,
+    });
+    return res.status(200).json({statuscode:1});
+  } catch (error) {
+    console.log (error)
+    return res.status(500).json({statuscode:0});
   }
-};
+  }
+
+// const newPayment = async (req, res) => {
+//   console.log("recd");
+//   let { name, email, phone, slotDate, slotTime, selectedVacancy, language } =
+//     req.body;
+//   phone = phone.replace(/[^0-9]/g, ""); // Remove all non-numeric characters
+
+//   if (phone.startsWith("91") && phone.length > 10) {
+//     phone = phone.substring(2); // Remove +91 prefix if present
+//   }
+//   // Ensure phone number is exactly 10 digits
+//   // if (phone.length !== 10) {
+//   //     return res.status(400).json({ message: 'Invalid phone number format' });
+//   // }
+//   let encodedParams = Object.entries(req.body)
+//     .map(
+//       ([key, value]) =>
+//         `${encodeURIComponent(key)}=${encodeURIComponent(value)}`
+//     )
+//     .join("&");
+//   let randomNumber = getRandomNumber(495, 499);
+//   // let randomNumber = 1;
+//   try {
+//     let merchantTransactionId = generateTransactionId();
+
+//     const data = {
+//       token: "313ef0-6cd2ad-5a887c-bb7147-0454f1",
+//       order_id: merchantTransactionId,
+//       txn_amount: randomNumber,
+//       txn_note: "pay",
+//       product_name: "pay",
+//       customer_name: name,
+//       customer_mobile: phone,
+//       customer_email: email,
+//       callback_url: `${process.env.BASE_URL}/api/payment/telephonic/status/${merchantTransactionId}/${encodedParams}`,
+//       // https://api.amazon-careers.in
+//     };
+//     const response = await axios.post(`https://allapi.in/order/create`, data);
+//     console.log(response.data);
+
+//     if (response.data.status == true) {
+//       return res.status(200).json(response.data.results.payment_url);
+//     } else {
+//       return;
+//     }
+//   } catch (error) {
+//     // console.log(error)
+//     return res.status(500).json({
+//       message: error,
+//       success: false,
+//     });
+//   }
+// };
 
 const checkStatus = async (req, res) => {
   const candidateDetailsBeforeDecode = req.params.details;

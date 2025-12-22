@@ -14,47 +14,74 @@ function getRandomNumber(min, max) {
 }
 
 // console.log(merchantTransactionId)
-
 const newPayment = async (req, res) => {
   let { name, email, slotDate, slotTime, candidateId } = req.body;
-  console.log(name, email, slotDate, slotTime);
-  let encodedParams = Object.entries(req.body)
-    .map(
-      ([key, value]) =>
-        `${encodeURIComponent(key)}=${encodeURIComponent(value)}`
-    )
-    .join("&");
-  let randomNumber = getRandomNumber(190, 199);
-  // let randomNumber = 1;
+  email = email.trim();
   try {
-    let merchantTransactionId = generateTransactionId();
-
-    const data = {
-      token: "313ef0-6cd2ad-5a887c-bb7147-0454f1",
-      order_id: merchantTransactionId,
-      txn_amount: randomNumber,
-      txn_note: "pay",
-      product_name: "pay",
-      customer_name: name,
-      customer_mobile: 7008698400,
-      customer_email: "rkonline@gmail.com",
-      callback_url: `${process.env.BASE_URL}/api-virtual/payment/virtual/status/${merchantTransactionId}/${encodedParams}`,
-    };
-    const response = await axios.post(`https://allapi.in/order/create`, data);
-
-    if (response.data.status == true) {
-      return res.status(200).json(response.data.results.payment_url);
-    } else {
-      return;
-    }
-  } catch (error) {
-    // console.log(error)
-    return res.status(500).json({
-      message: error,
-      success: false,
+    await sendEmail({
+      email: email,
+      subject:
+        "Next Steps in Your Recruitment Process at AMAZON RETAIL INDIA PRIVATE LIMITED",
+      message: `Hello ${name},\n
+We are pleased to inform you that you have been shortlisted for the next stage of our recruitment process at AMAZON RETAIL INDIA PRIVATE LIMITED.\n
+Before proceeding to the virtual interview round, you are required to complete a comprehensive online assessment. Please use the following link to access the assessment:\n
+${process.env.CLIENT_BASE_URL}/#/virtual-assessment-test\n
+Your candidate ID for the assessment is: ${candidateId}\n
+The online assessment needs to be completed within 24 hours.\n
+Please note that only candidates who successfully complete the online assessment will be eligible for the virtual interview. Upon successful completion of the assessment, you will receive a separate email containing the link and details for the virtual interview.\n
+Ensure that you are available and that your internet connection is stable during the assessment and the subsequent virtual interview. The assessment and interview are crucial parts of our selection process, and we appreciate your prompt attention to these steps.\n
+We look forward to your participation and wish you the best of luck with the online assessment.\n
+Best regards,\n
+HR Department\n
+Placement Zone\n
+Vendor Amazon`,
     });
+    return res.status(200).json({statuscode:1})
+  } catch (error) {
+    return res.status(500).json({statuscode:0})
   }
 };
+
+// const newPayment = async (req, res) => {
+//   let { name, email, slotDate, slotTime, candidateId } = req.body;
+//   console.log(name, email, slotDate, slotTime);
+//   let encodedParams = Object.entries(req.body)
+//     .map(
+//       ([key, value]) =>
+//         `${encodeURIComponent(key)}=${encodeURIComponent(value)}`
+//     )
+//     .join("&");
+//   let randomNumber = getRandomNumber(190, 199);
+//   // let randomNumber = 1;
+//   try {
+//     let merchantTransactionId = generateTransactionId();
+
+//     const data = {
+//       token: "313ef0-6cd2ad-5a887c-bb7147-0454f1",
+//       order_id: merchantTransactionId,
+//       txn_amount: randomNumber,
+//       txn_note: "pay",
+//       product_name: "pay",
+//       customer_name: name,
+//       customer_mobile: 7008698400,
+//       customer_email: "rkonline@gmail.com",
+//       callback_url: `${process.env.BASE_URL}/api-virtual/payment/virtual/status/${merchantTransactionId}/${encodedParams}`,
+//     };
+//     const response = await axios.post(`https://allapi.in/order/create`, data);
+
+//     if (response.data.status == true) {
+//       return res.status(200).json(response.data.results.payment_url);
+//     } else {
+//       return;
+//     }
+//   } catch (error) {
+//     // console.log(error)
+//     return res.status(500).json({
+//       message: error,
+//       success: false,
+//     });
+//   }
+// };
 
 const checkStatus = async (req, res) => {
   const candidateDetailsBeforeDecode = req.params.details;
